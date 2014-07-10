@@ -4,24 +4,25 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use Srtfisher\Automtic\Client;
 use League\OAuth2\Client\Entity\User;
 
-class AutomaticProvider {
+class AutomaticProvider extends AbstractProvider {
   public $scopes = [
     'scope:location',
     'scope:vehicle',
     'scope:trip:summary',
     'scope:ignition:on',
     'scope:ignition:off',
-    'scope:notification:speeding',
-    'scope:notification:hard_brake',
-    'scope:notification:hard_accel',
+    // 'scope:notification:speeding',
+    // 'scope:notification:hard_brake',
+    // 'scope:notification:hard_accel',
     // 'scope:notification:stopped',
     // 'scope:region:changed',
     // 'scope:parking:changed',
-    'scope:mil:on',
-    'scope:mil:of',
+    // 'scope:mil:on',
+    // 'scope:mil:of',
   ];
 
   public $responseType = 'json';
+  public $scopeSeparator = ' ';
 
   public function urlAuthorize()
   {

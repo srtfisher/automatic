@@ -1,7 +1,8 @@
-<?php namespace Srtfisher\Automattic;
+<?php namespace Srtfisher\Automatic;
 
 use Srtfisher\Automatic\Endpoint\EndpointInterface;
 use Srtfisher\Automatic\Endpoint\AbstractEndpoint;
+use Srtfisher\Automatic\Authentication\Manager as Authentication;
 use InvalidArgumentException;
 
 class Client {
@@ -28,17 +29,36 @@ class Client {
   protected $clientSecret;
 
   /**
+   * @var Srtfisher\Automatic\Authentication\Manager
+   */
+  protected $authentication;
+
+  /**
+   * @var string Access Token
+   */
+  protected $token;
+
+  /**
+   * @var string Redirect URI
+   */
+  protected $redirectUri;
+
+  /**
    * Automatic Client Constructor
    *
    * @param  string
    * @param  string
    */
-  public function __construct($clientId, $clientSecret)
+  public function __construct($clientId, $clientSecret, $token = null, $redirectUri = null)
   {
     $this->registerDefaultEndpoints();
+    $this->setRedirectUri($redirectUri);
 
+    // Request Details
     $this->setClientId($clientId);
-    $this->clientSecret($clientSecret);
+    $this->setClientSecret($clientSecret);
+    $this->setToken($token);
+    $this->setAuthentication();
   }
 
   /**
@@ -58,6 +78,22 @@ class Client {
   }
 
   /**
+   * @return string OAuth Access Token
+   */
+  public function getToken()
+  {
+    return (string) $this->token;
+  }
+
+  /**
+   * @return string OAuth Access Token
+   */
+  public function getRedirectUri()
+  {
+    return (string) $this->redirectUri;
+  }
+
+  /**
    * @param string Set the Client ID
    */
   public function setClientId($clientId)
@@ -74,13 +110,50 @@ class Client {
   }
 
   /**
+   * @param string Set the Access Token
+   */
+  public function setToken($token)
+  {
+    $this->token = (string) $token;
+  }
+
+  /**
+   * @param string Set the Redirect URI
+   */
+  public function setRedirectUri($redirectUri)
+  {
+    $this->redirectUri = (string) $redirectUri;
+  }
+
+  /**
    * Register the Default Endpoints of the Client
    *
    * @access protected
    */
   protected function registerDefaultEndpoints()
   {
-    $this->registerEndpoint(new Srtfisher\Automatic\Endpoint\Vehicle);
+    $this->registerEndpoint(new \Srtfisher\Automatic\Endpoint\VehicleEndpoint($this));
+  }
+
+  /**
+   * Setup Authentication Manager
+   *
+   * @return Authentication
+   */
+  protected function setAuthentication()
+  {
+    $this->authentication = new Authentication($this);
+    return $this->authentication;
+  }
+
+  /**
+   * Retrieve Authentication Manager
+   *
+   * @return Authentication
+   */
+  public function getAuthentication()
+  {
+    return $this->authentication;
   }
 
   /**
@@ -92,7 +165,7 @@ class Client {
    */
   public function registerEndpoint(AbstractEndpoint $endpoint)
   {
-    if (! ($resource instanceof EndpointInterface)) {
+    if (! ($endpoint instanceof EndpointInterface)) {
       throw new InvalidArgumentException('Endpoint passed does not implement EndpointInterface interface');
     }
 

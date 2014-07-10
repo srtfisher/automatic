@@ -3,7 +3,7 @@
 use Srtfisher\Automatic\Resource\VehicleResource;
 use InvalidArgumentException;
 
-class Vehicle extends AbstractEndpoint implements EndpointInterface {
+class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface {
   public $name = 'vehicles';
 
   public function getResource()
@@ -26,7 +26,7 @@ class Vehicle extends AbstractEndpoint implements EndpointInterface {
     throw new InvalidArgumentException('Automatic API does not support creating a vehicle via the Automatic API.');
     return null;
   }
-  
+
   public function save()
   {
     throw new InvalidArgumentException('Automatic API does not support saving vehicle data via the Automatic API.');

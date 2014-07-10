@@ -1,6 +1,6 @@
 <?php namespace Srtfisher\Automatic\Resource;
 
-use Srtfisher\Automatic\Resource\AbstractEndpoint;
+use Srtfisher\Automatic\Endpoint\AbstractEndpoint;
 use InvalidArgumentException;
 use ArrayAccess;
 
@@ -31,10 +31,34 @@ abstract class AbstractResource implements ArrayAccess {
    *
    * @param  Array
    */
-  public function __construct($data, AbstractEndpoint $endpoint)
+  public function __construct($data = [], AbstractEndpoint $endpoint = null)
+  {
+    $this->fill($data);
+
+    if ($endpoint) $this->setEndpoint($endpoint);
+  }
+
+  /**
+   * Set the Endpoint Resource
+   *
+   * @param AbstractEndpoint
+   */
+  public function setEndpoint(AbstractEndpoint $endpoint = null)
+  {
+    $this->endpoint = $endpoint;
+    return $this;
+  }
+
+  /**
+   * Fill in Data
+   *
+   * @param  Array
+   * @return AbstractResource
+   */
+  public function fill($data = [])
   {
     $this->originals = $this->items = $data;
-    $this->endpoint = $endpoint;
+    return $this;
   }
 
   /**

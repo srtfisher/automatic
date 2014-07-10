@@ -13,6 +13,11 @@ class Requestor {
    */
   protected $client;
 
+  /**
+   * Request Constructor
+   *
+   * @param  Client
+   */
   public function __construct(Client $client)
   {
     $this->client = $client;
@@ -31,7 +36,7 @@ class Requestor {
     $guzzle = new GuzzleClient(['base_url' => Client::$apiBase]);
 
     $options = [];
-    
+
     switch (strtoupper($method)) {
       case 'GET':
         $options['query'] = $params;
@@ -45,7 +50,8 @@ class Requestor {
     }
 
     $options['headers'] = $headers;
-
+    $options['headers']['Authorization'] = 'token '.$this->client->getToken();
+    
     try {
       return $guzzle->$method($location, $options);
     } catch (ClientErrorResponseException $e) {

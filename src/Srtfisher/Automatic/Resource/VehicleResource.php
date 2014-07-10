@@ -1,6 +1,6 @@
 <?php namespace Srtfisher\Automatic\Resource;
 
-class Vehicle extends AbstractResource implements ResourceInterface {
+class VehicleResource extends AbstractResource implements ResourceInterface {
   public static function createFromResponse($data)
   {
 

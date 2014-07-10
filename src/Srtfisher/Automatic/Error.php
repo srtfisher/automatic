@@ -24,6 +24,6 @@ class Error {
 
   public static function create($exception)
   {
-    return new Error(get_class($exception), $exception->getMessage(), $exception;)
+    return new Error(get_class($exception), $exception->getMessage(), $exception);
   }
 }

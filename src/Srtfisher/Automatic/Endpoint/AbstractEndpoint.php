@@ -3,6 +3,7 @@
 use Illuminate\Support\Collection;
 use Srtfisher\Automatic\Requestor;
 use Srtfisher\Automatic\Client;
+use Srtfisher\Automatic\Error;
 
 abstract class AbstractEndpoint {
   /**
@@ -29,7 +30,25 @@ abstract class AbstractEndpoint {
    */
   public function all($params = [])
   {
-    return $this->requestor()->make($this->buildResourceUrl(), 'GET', $params);
+    $response = $this->requestor()->make($this->buildResourceUrl(), 'GET', $params);
+
+    // Request Error
+    if ($response instanceof Error) {
+      return $response;
+    }
+
+    // Format the response
+    $collection = new Collection;
+    foreach ($response->json() as $v) {
+      // Build the Resource
+      $resource = $this->getResource();
+      $resource->fill($v);
+      $resource->setEndpoint($this);
+
+      $collection->push($resource);
+    }
+
+    return $collection;
   }
 
   /**
@@ -47,9 +66,22 @@ abstract class AbstractEndpoint {
   /**
    * Retrieve a Single Resource
    */
-  public function retrieve($resource_id)
+  public function retrieve($resource_id, $params = [])
   {
-    return $this->requestor()->make($this->buildResourceUrl($resource_id), 'GET', $params);
+    $response = $this->requestor()->make($this->buildResourceUrl($resource_id), 'GET', $params);
+
+    // Request Error
+    if ($response instanceof Error) {
+      return $response;
+    }
+
+    // Build the Resource
+    $resource = $this->getResource();
+    $resource
+      ->fill($response->json())
+      ->setEndpoint($this);
+
+    return $resource;
   }
 
   /**

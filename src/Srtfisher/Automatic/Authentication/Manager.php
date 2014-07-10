@@ -20,15 +20,9 @@ class Manager
    */
   protected $redirectUri;
 
-  /**
-   * @type string Access Token
-   */
-  protected $token;
-
-  public function __construct(Client $client, $token, $redirectUri = null)
+  public function __construct(Client $client, $redirectUri = null)
   {
     $this->client = $client;
-    $this->token = (string) $token;
     $this->redirectUri = $redirectUri;
   }
 
@@ -56,7 +50,7 @@ class Manager
       'code' => $code
     ]);
 
-    $this->token = (string) $token;
+    $this->client->setToken((string) $token);
 
     return $token;
   }
@@ -68,7 +62,7 @@ class Manager
    */
   public function setAccessToken($token)
   {
-    $this->token = (string) $token;
+    $this->client->setToken((string) $token);
   }
 
   /**
@@ -83,7 +77,7 @@ class Manager
     $grant = new \League\OAuth2\Client\Grant\RefreshToken;
     $token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 
-    $this->token = (string) $token;
+    $this->client->setToken((string) $token);
 
     return $token;
   }
@@ -95,9 +89,9 @@ class Manager
   public function getProvider()
   {
     return new AutomaticProvider([
-      'clientId' => $client->getClientId(),
-      'clientSecret' => $client->getClientSecre(),
-      'redirectUri' => $this->redirectUri
+      'clientId' => $this->client->getClientId(),
+      'clientSecret' => $this->client->getClientSecret(),
+      //'redirectUri' => $this->client->getRedirectUri()
     ]);
   }
 }
