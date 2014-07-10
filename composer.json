@@ -1,0 +1,27 @@
+{
+  "name": "seanfisher/automatic",
+  "description": "Automatic PHP 5.4+ Library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sean Fisher",
+      "email": "hi@seanfisher.co"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "guzzlehttp/guzzle": "4.1.*",
+    "league/oauth2-client": "0.3.*",
+    "illuminate/support": "~4.2.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Srtfisher\\Automatic\\": "src/"
+    }
+  }
+}
