@@ -70,6 +70,37 @@ abstract class AbstractResource implements ArrayAccess {
   }
 
   /**
+   * @return boolean
+   */
+  public function isNewResource()
+  {
+    $resource_id = $this->getResourceId();
+    return (is_null($resource_id) || ! $resource_id);
+  }
+
+  /**
+   * Retrieve the Resource Identifier
+   *
+   * @return integer|string
+   */
+  public function getResourceId()
+  {
+    return $this->id;
+  }
+
+  /**
+   * Set the Resource Identifier
+   *
+   * @param string|integer
+   * @return AbstractResource
+   */
+  public function setResourceId($resource_id)
+  {
+    $this->id = $resource_id;
+    return $this;
+  }
+
+  /**
    * Reset the Resource to its loaded state
    *
    * @return AbstractResource

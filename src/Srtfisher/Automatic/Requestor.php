@@ -31,6 +31,7 @@ class Requestor {
     $guzzle = new GuzzleClient(['base_url' => Client::$apiBase]);
 
     $options = [];
+    
     switch (strtoupper($method)) {
       case 'GET':
         $options['query'] = $params;

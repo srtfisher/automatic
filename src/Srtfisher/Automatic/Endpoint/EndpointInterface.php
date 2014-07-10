@@ -7,4 +7,5 @@ interface EndpointInterface {
    * @return Srtfisher\Automatic\Resource\AbstractResource
    */
   public function getResource();
+  public function validateData($data);
 }
