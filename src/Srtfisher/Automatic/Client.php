@@ -202,7 +202,7 @@ class Client
     public function __set($name, $value)
     {
         throw new InvalidArgumentException(
-            'Client does not support setting endpoint this way.'
+            'Client does not support setting endpoint this way. '
             .'Please use "registerEndpoint".'
         );
         return null;
