@@ -1,6 +1,11 @@
 Automatic API Library
 =====================
 
+[![License](http://img.shields.io/packagist/l/srtfisher/automatic.svg?style=flat)](https://github.com/srtfisher/automatic/blob/master/LICENSE)
+[![Coverage Status](https://coveralls.io/repos/srtfisher/automatic/badge.png)](https://coveralls.io/r/srtfisher/automatic)
+[![Build Status](http://img.shields.io/travis/srtfisher/automatic.svg?style=flat)](http://travis-ci.org/srtfisher/automatic)
+[![Latest Stable Version](https://poser.pugx.org/srtfisher/automatic/v/stable.svg)](https://packagist.org/packages/srtfisher/automatic)
+
 [Automatic](https://www.automatic.com/) as described by their website:
 
 > Automatic, your smartphone enabled driving assistant, gives you driving feedback, helps to diagnose check engine codes & more. Become a smarter driver today.
