@@ -8,7 +8,13 @@ php:
 
 before_script:
   - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - composer require satooshi/php-coveralls:dev-master --no-update --dev
+  - composer install
 
 script:
-  - phpunit
+  - mkdir -p build/logs
+  - phpunit --coverage-text
+  - ./vendor/bin/phpcs src --standard=psr2
+
+after_script:
+  - php vendor/bin/coveralls
