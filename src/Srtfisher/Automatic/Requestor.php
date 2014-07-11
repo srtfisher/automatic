@@ -5,7 +5,8 @@ use GuzzleHttp\Exception\ClientErrorResponseException;
 use GuzzleHttp\Exception\ServerException;
 use Exception;
 
-class Requestor {
+class Requestor
+{
   /**
    * Client Instance
    *
@@ -51,7 +52,7 @@ class Requestor {
 
     $options['headers'] = $headers;
     $options['headers']['Authorization'] = 'token '.$this->client->getToken();
-    
+
     try {
       return $guzzle->$method($location, $options);
     } catch (ClientErrorResponseException $e) {

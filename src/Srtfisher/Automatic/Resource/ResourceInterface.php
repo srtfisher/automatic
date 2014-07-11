@@ -1,5 +1,6 @@
 <?php namespace Srtfisher\Automatic\Resource;
 
-interface ResourceInterface {
+interface ResourceInterface
+{
   public static function createFromResponse($data);
 }

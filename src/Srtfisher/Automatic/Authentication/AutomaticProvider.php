@@ -4,7 +4,8 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use Srtfisher\Automtic\Client;
 use League\OAuth2\Client\Entity\User;
 
-class AutomaticProvider extends AbstractProvider {
+class AutomaticProvider extends AbstractProvider
+{
   public $scopes = [
     'scope:location',
     'scope:vehicle',

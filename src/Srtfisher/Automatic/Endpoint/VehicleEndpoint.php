@@ -3,7 +3,8 @@
 use Srtfisher\Automatic\Resource\VehicleResource;
 use InvalidArgumentException;
 
-class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface {
+class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface
+{
   public $name = 'vehicles';
 
   public function getResource()

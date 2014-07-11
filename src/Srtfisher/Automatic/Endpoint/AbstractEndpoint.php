@@ -5,7 +5,8 @@ use Srtfisher\Automatic\Requestor;
 use Srtfisher\Automatic\Client;
 use Srtfisher\Automatic\Error;
 
-abstract class AbstractEndpoint {
+abstract class AbstractEndpoint
+{
   /**
    * Name of the Endpoint
    */

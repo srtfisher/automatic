@@ -5,7 +5,8 @@
  *
  * Returned in the event of an error
  */
-class Error {
+class Error
+{
   protected $type;
   protected $message;
   protected $exception;
@@ -19,7 +20,7 @@ class Error {
 
   public function __toString()
   {
-    return sprintf('[ERROR] %s: %s', $type, $message);
+    return sprintf('[ERROR] %s: %s', $this->type, $this->message);
   }
 
   public static function create($exception)

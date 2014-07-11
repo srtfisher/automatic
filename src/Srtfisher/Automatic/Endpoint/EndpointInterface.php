@@ -1,6 +1,7 @@
 <?php namespace Srtfisher\Automatic\Endpoint;
 
-interface EndpointInterface {
+interface EndpointInterface
+{
   /**
    * Provide a Resource Instance
    *

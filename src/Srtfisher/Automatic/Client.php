@@ -5,7 +5,8 @@ use Srtfisher\Automatic\Endpoint\AbstractEndpoint;
 use Srtfisher\Automatic\Authentication\Manager as Authentication;
 use InvalidArgumentException;
 
-class Client {
+class Client
+{
   /**
    * Endpoints
    *

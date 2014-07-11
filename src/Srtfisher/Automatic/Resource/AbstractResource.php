@@ -4,7 +4,8 @@ use Srtfisher\Automatic\Endpoint\AbstractEndpoint;
 use InvalidArgumentException;
 use ArrayAccess;
 
-abstract class AbstractResource implements ArrayAccess {
+abstract class AbstractResource implements ArrayAccess
+{
   /**
    * Items Storage
    *
