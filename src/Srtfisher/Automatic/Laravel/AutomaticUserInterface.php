@@ -2,10 +2,10 @@
 
 interface AutomaticUserInterface
 {
-  /**
-   * Retrieve the User Token
-   *
-   * @return string|void
-   */
-  public function getAutomaticAccessToken();
+    /**
+     * Retrieve the User Token
+     *
+     * @return string|void
+     */
+    public function getAutomaticAccessToken();
 }

@@ -1,4 +1,5 @@
-<?php namespace Srtfisher\Automatic;
+<?php
+namespace Srtfisher\Automatic;
 
 /**
  * Error Object
@@ -7,24 +8,24 @@
  */
 class Error
 {
-  protected $type;
-  protected $message;
-  protected $exception;
+    protected $type;
+    protected $message;
+    protected $exception;
 
-  public function __construct($type, $message, $exception)
-  {
-    $this->type = $type;
-    $this->message = $message;
-    $this->exception = $exception;
-  }
+    public function __construct($type, $message, $exception)
+    {
+        $this->type      = $type;
+        $this->message   = $message;
+        $this->exception = $exception;
+    }
 
-  public function __toString()
-  {
-    return sprintf('[ERROR] %s: %s', $this->type, $this->message);
-  }
+    public function __toString()
+    {
+        return sprintf('[ERROR] %s: %s', $this->type, $this->message);
+    }
 
-  public static function create($exception)
-  {
-    return new Error(get_class($exception), $exception->getMessage(), $exception);
-  }
+    public static function create($exception)
+    {
+        return new Error(get_class($exception), $exception->getMessage(), $exception);
+    }
 }

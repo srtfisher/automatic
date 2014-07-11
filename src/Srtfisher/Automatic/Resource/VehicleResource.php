@@ -2,8 +2,8 @@
 
 class VehicleResource extends AbstractResource implements ResourceInterface
 {
-  public static function createFromResponse($data)
-  {
+    public static function createFromResponse($data)
+    {
 
-  }
+    }
 }

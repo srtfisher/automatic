@@ -2,5 +2,5 @@
 
 interface ResourceInterface
 {
-  public static function createFromResponse($data);
+    public static function createFromResponse($data);
 }
