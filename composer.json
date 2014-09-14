@@ -11,8 +11,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=5.4.0",
-    "guzzlehttp/guzzle": "4.1.*",
-    "league/oauth2-client": "dev-master",
+    "guzzlehttp/guzzle": "4.2.*",
+    "league/oauth2-client": "0.3.*",
     "illuminate/support": "4.2.*"
   },
   "require-dev": {
