@@ -1,4 +1,5 @@
-<?php namespace Srtfisher\Automatic;
+<?php
+namespace Srtfisher\Automatic;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientErrorResponseException;
@@ -15,6 +16,13 @@ class Requestor
     protected $client;
 
     /**
+     * Guzzle Instance
+     *
+     * @var GuzzleClient
+     */
+    protected $httpClient;
+
+    /**
      * Request Constructor
      *
      * @param    Client
@@ -22,6 +30,12 @@ class Requestor
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->setHttpClient(new GuzzleClient([
+            'base_url' => Client::$apiBase,
+            'defaults' => [
+                'verify' => false
+            ]
+        ]));
     }
 
     /**
@@ -34,8 +48,6 @@ class Requestor
      */
     public function make($location, $method = 'GET', $params = [], $headers = [])
     {
-        $guzzle = new GuzzleClient(['base_url' => Client::$apiBase]);
-
         $options = [];
 
         switch (strtoupper($method)) {
@@ -54,7 +66,7 @@ class Requestor
         $options['headers']['Authorization'] = 'token '.$this->client->getToken();
 
         try {
-            return $guzzle->$method($location, $options);
+            return $this->getHttpClient()->$method($location, $options);
         } catch (ClientErrorResponseException $e) {
             return Error::create($e);
         } catch (ServerException $e) {
@@ -62,5 +74,26 @@ class Requestor
         } catch (Exception $e) {
             return Error::create($e);
         }
+    }
+
+    /**
+     * Set HTTP Client
+     *
+     * @param GuzzleClient
+     */
+    public function setHttpClient(GuzzleClient $client)
+    {
+        $this->httpClient = $client;
+        return $this;
+    }
+
+    /**
+     * Retrieve HTTP Client
+     *
+     * @return GuzzleClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
     }
 }

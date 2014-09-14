@@ -1,10 +1,11 @@
-<?php namespace Srtfisher\Automatic\Authentication;
+<?php
+namespace Srtfisher\Automatic\Authentication;
 
-use League\OAuth2\Client\Provider\AbstractProvider;
-use Srtfisher\Automtic\Client;
-use League\OAuth2\Client\Entity\User;
+use League\OAuth2\Client\Provider\IdentityProvider;
+use Srtfisher\Automatic\Client;
+use League\OAuth2\Client\Provider\User;
 
-class AutomaticProvider extends AbstractProvider
+class AutomaticProvider extends IdentityProvider
 {
     public $scopes = [
         'scope:location',
@@ -25,6 +26,7 @@ class AutomaticProvider extends AbstractProvider
     public $responseType = 'json';
     public $scopeSeparator = ' ';
 
+    // @codeCoverageIgnoreStart
     public function urlAuthorize()
     {
         return 'https://www.automatic.com/oauth/authorize';
@@ -34,6 +36,7 @@ class AutomaticProvider extends AbstractProvider
     {
         return 'https://www.automatic.com/oauth/access_token';
     }
+    // @codeCoverageIgnoreEnd
 
     public function urlUserDetails(\League\OAuth2\Client\Token\AccessToken $token)
     {
@@ -43,10 +46,7 @@ class AutomaticProvider extends AbstractProvider
     public function userDetails($response, \League\OAuth2\Client\Token\AccessToken $token)
     {
         $user = new User;
-
-        $user->exchangeArray([
-            'uid' => $response->id,
-        ]);
+        $user->uid = $response->id;
 
         return $user;
     }

@@ -1,4 +1,5 @@
-<?php namespace Srtfisher\Automatic\Laravel;
+<?php
+namespace Srtfisher\Automatic\Laravel;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
