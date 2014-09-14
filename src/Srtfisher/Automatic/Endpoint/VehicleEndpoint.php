@@ -12,6 +12,7 @@ class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface
         return new VehicleResource;
     }
 
+    // @codeCoverageIgnoreStart
     /**
      * Validate Vehicle Data
      *
@@ -33,4 +34,5 @@ class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface
         throw new InvalidArgumentException('Automatic API does not support saving vehicle data via the Automatic API.');
         return null;
     }
+    // @codeCoverageIgnoreEnd
 }

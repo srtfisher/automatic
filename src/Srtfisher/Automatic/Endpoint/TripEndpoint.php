@@ -13,6 +13,7 @@ class TripEndpoint extends AbstractEndpoint implements EndpointInterface
         return new TripResource;
     }
 
+    // @codeCoverageIgnoreStart
     /**
      * Validate Trip Data
      *
@@ -34,4 +35,5 @@ class TripEndpoint extends AbstractEndpoint implements EndpointInterface
         throw new InvalidArgumentException('Automatic API does not support saving trip data via the Automatic API.');
         return null;
     }
+    // @codeCoverageIgnoreEnd
 }

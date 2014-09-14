@@ -72,10 +72,11 @@ abstract class AbstractResource implements ArrayAccess
      */
     public static function create($data, AbstractEndpoint $endpoint)
     {
-        $object = new self($datam, $endpoint);
+        $object = new static($data, $endpoint);
         return $object;
     }
 
+    // @codeCoverageIgnoreStart
     /**
      * Save the Resource
      *
@@ -95,6 +96,8 @@ abstract class AbstractResource implements ArrayAccess
     {
 
     }
+
+    // @codeCoverageIgnoreEnd
 
     /**
      * @return boolean
@@ -148,7 +151,6 @@ abstract class AbstractResource implements ArrayAccess
         if (array_key_exists($key, $this->items)) {
             return $this->items[$key];
         } else {
-            throw new InvalidArgumentException(sprintf('Data value "%s" does not exist for resource', $key));
             return null;
         }
     }

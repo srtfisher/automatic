@@ -1,4 +1,5 @@
-<?php namespace Srtfisher\Automatic\Resource;
+<?php
+namespace Srtfisher\Automatic\Resource;
 
 /**
  * Vehicle Object

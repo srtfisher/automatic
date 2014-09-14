@@ -2,6 +2,9 @@
 namespace Srtfisher\Automatic\Test;
 
 use Mockery as m;
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+use GuzzleHttp\Stream\Stream;
 
 class ClientTest extends \BaseTestCase
 {
@@ -9,6 +12,7 @@ class ClientTest extends \BaseTestCase
     {
         $this->assertInstanceOf('Srtfisher\Automatic\Endpoint\VehicleEndpoint', $this->client->vehicles);
         $this->assertInstanceOf('Srtfisher\Automatic\Resource\Vehicle', $this->client->vehicles->getResource());
+        $this->assertInstanceOf('Srtfisher\Automatic\Resource\Trip', $this->client->trips->getResource());
     }
 
     public function testRegisterEndpoint()
@@ -81,5 +85,35 @@ class ClientTest extends \BaseTestCase
     public function testGetAuthentication()
     {
         $this->assertInstanceOf('Srtfisher\Automatic\Authentication\Manager', $this->client->getAuthentication());
+    }
+
+    public function testCollectionResponse()
+    {
+        // Make a clone for this test
+        $client = clone $this->client;
+
+        // Change the http client to mock response
+        $httpClient = $client->getRequestor()->getHttpClient();
+        $stream = Stream::factory(json_encode([
+            [
+                    'id' => 'abcd1234',
+                    'year' => 2001,
+                    'make' => 'Volkswagen',
+                    'model' => 'Passat',
+                    'color' => '#fafafa',
+                    'display_name' => 'My Passat'
+            ]
+        ]));
+
+        $mock = new Mock([
+            new Response(200, [], $stream)
+        ]);
+
+        $httpClient->getEmitter()->attach($mock);
+
+        // Built the response, make the request and see the response
+        $vehicles = $client->vehicles->all();
+        $this->assertInstanceOf('Illuminate\Support\Collection', $vehicles);
+        $this->assertInstanceOf('Srtfisher\Automatic\Resource\Vehicle', $vehicles->first());
     }
 }

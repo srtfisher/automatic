@@ -51,7 +51,7 @@ abstract class AbstractEndpoint
 
         return $collection;
     }
-
+    
     /**
      * Create a new Resource Object
      *
@@ -92,7 +92,7 @@ abstract class AbstractEndpoint
      */
     protected function requestor()
     {
-        return new Requestor($this->client);
+        return $this->client->getRequestor();
     }
 
     /**

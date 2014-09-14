@@ -45,6 +45,11 @@ class Client
     protected $redirectUri;
 
     /**
+     * @var Requestor
+     */
+    protected $requestor;
+
+    /**
      * Automatic Client Constructor
      *
      * @param    string
@@ -60,6 +65,7 @@ class Client
         $this->setClientSecret($clientSecret);
         $this->setToken($token);
         $this->setAuthentication();
+        $this->setRequestor(new Requestor($this));
     }
 
     /**
@@ -207,5 +213,26 @@ class Client
             .'Please use "registerEndpoint".'
         );
         return null;
+    }
+
+    /**
+     * Get the Client Requestor
+     *
+     * @return Requestor
+     */
+    public function getRequestor()
+    {
+        return $this->requestor;
+    }
+
+    /**
+     * Set the Client Requestor
+     *
+     * @param Requestor
+     */
+    public function setRequestor(Requestor $requestor)
+    {
+        $this->requestor = $requestor;
+        return $this;
     }
 }

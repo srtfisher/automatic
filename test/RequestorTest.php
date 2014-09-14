@@ -36,7 +36,6 @@ class RequestorTest extends \BaseTestCase
         ]);
 
         $httpClient->getEmitter()->attach($mock);
-        $this->requestor->setHttpClient($httpClient);
     }
 
     public function testAllRequest()
