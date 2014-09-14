@@ -134,6 +134,7 @@ class Client
     protected function registerDefaultEndpoints()
     {
         $this->registerEndpoint(new \Srtfisher\Automatic\Endpoint\VehicleEndpoint($this));
+        $this->registerEndpoint(new \Srtfisher\Automatic\Endpoint\TripEndpoint($this));
     }
 
     /**

@@ -60,7 +60,7 @@ $vehicles = $client->vehicles->all();
 var_dump($vehicles);
 ?>
       </pre>
-
+      <hr>
       <h4>Single Vehicle</h4>
       <?php
       $vehicle_id = $vehicles->first()->id;
@@ -71,6 +71,31 @@ var_dump($vehicles);
       <pre>
 <?php var_dump($client->vehicles->retrieve($vehicle_id)); ?>
       </pre>
+      <hr>
+      <h4>Trips</h4>
+      <p>
+          <code>$client->trips->all()</code>
+      </p>
+      <pre>
+<?php
+$trips = $client->trips->all();
+var_dump($trips);
+?>
+        </pre>
+
+
+    <hr>
+    <h4>Single Trip</h4>
+    <?php
+    $trip_id = $trips->first()->id;
+    ?>
+    <p>
+      <code>$client->trips->retrieve('<?php echo $trip_id; ?>');</code>
+    </p>
+    <pre>
+<?php var_dump($client->trips->retrieve($trip_id)); ?>
+    </pre>
+
     </div>
   </body>
 </html>
