@@ -1,6 +1,6 @@
 <?php namespace Srtfisher\Automatic\Endpoint;
 
-use Srtfisher\Automatic\Resource\VehicleResource;
+use Srtfisher\Automatic\Resource\Vehicle as VehicleResource;
 use InvalidArgumentException;
 
 class VehicleEndpoint extends AbstractEndpoint implements EndpointInterface

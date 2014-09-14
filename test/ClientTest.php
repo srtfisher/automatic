@@ -8,7 +8,7 @@ class ClientTest extends \BaseTestCase
     public function testDefaultEndpoint()
     {
         $this->assertInstanceOf('Srtfisher\Automatic\Endpoint\VehicleEndpoint', $this->client->vehicles);
-        $this->assertInstanceOf('Srtfisher\Automatic\Resource\VehicleResource', $this->client->vehicles->getResource());
+        $this->assertInstanceOf('Srtfisher\Automatic\Resource\Vehicle', $this->client->vehicles->getResource());
     }
 
     public function testRegisterEndpoint()
